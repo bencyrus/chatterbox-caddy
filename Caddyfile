@@ -5,4 +5,9 @@
 
     # Set the PostgREST URL from the environment variable
     reverse_proxy {$POSTGREST_URL}
+
+    # Test endpoint
+    handle /test {
+        respond "Caddy is working!" 200
+    }
 }
