@@ -4,7 +4,7 @@
     }
 
     # Set the PostgREST URL from the environment variable
-    reverse_proxy {$POSTGREST_URL}
+    reverse_proxy {env.POSTGREST_URL}
 
     # Test endpoint
     handle /test {
