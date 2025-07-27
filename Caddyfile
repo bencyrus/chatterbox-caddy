@@ -3,6 +3,11 @@
         output stdout
     }
 
+    # Health check endpoint
+    handle /health {
+        respond "Caddy says hi!" 200
+    }
+    
     # Set the PostgREST URL from the environment variable with proper configuration
     reverse_proxy {$POSTGREST_URL} {
         timeout 30s
@@ -10,10 +15,5 @@
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
         header_up X-Forwarded-Proto {scheme}
-    }
-
-    # Health check endpoint
-    handle /health {
-        respond "Caddy says hi!" 200
     }
 }
