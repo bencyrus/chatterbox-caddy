@@ -10,5 +10,6 @@
     
     # Set the PostgREST URL from the environment variable with proper configuration
     reverse_proxy {$POSTGREST_URL} {
+        header_up Host {upstream_hostport}
     }
 }
