@@ -1,4 +1,4 @@
-:{$PORT} {
+api.glovee.io {
     log {
         output stdout
     }
