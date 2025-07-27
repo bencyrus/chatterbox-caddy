@@ -1,15 +1,23 @@
-api.glovee.io {
+:{$PORT} {
     log {
         output stdout
     }
 
-    # Health check endpoint
+    # Health check endpoint for Cloud Run
     handle /health {
         respond "Caddy says hi!" 200
     }
-    
-    # Set the PostgREST URL from the environment variable with proper configuration
-    reverse_proxy {$POSTGREST_URL} {
-        header_up Host {upstream_hostport}
+
+    # Handle api.glovee.io subdomain
+    @api_subdomain host api.glovee.io
+    handle @api_subdomain {
+        reverse_proxy {$POSTGREST_URL} {
+            header_up Host {upstream_hostport}
+        }
+    }
+
+    # Default handler for other requests
+    handle {
+        respond "Service not found" 404
     }
 }
