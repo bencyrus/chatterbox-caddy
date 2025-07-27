@@ -10,9 +10,7 @@
     
     # Set the PostgREST URL from the environment variable with proper configuration
     reverse_proxy {$POSTGREST_URL} {
-        transport http {
-            dial_timeout 30s
-        }
+        timeout 30s
         header_up Host {upstream_hostport}
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
